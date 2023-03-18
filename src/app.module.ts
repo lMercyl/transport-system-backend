@@ -1,3 +1,9 @@
+import { Shedule } from './shedules/shedules.model';
+import { Car } from './cars/cars.model';
+import { ShedulesModule } from './shedules/shedules.module';
+import { CarsModule } from './cars/cars.module';
+import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/orders.model';
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { UserRoles } from './roles/user-roles.model';
@@ -27,12 +33,16 @@ import { User } from './users/users.model';
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DB,
-      models: [User, Role, UserRoles],
+      models: [User, Role, UserRoles, Order, Car, Shedule],
       autoLoadModels: true,
+      synchronize: true,
     }),
     UsersModule,
     RolesModule,
     AuthModule,
+    OrdersModule,
+    CarsModule,
+    ShedulesModule,
   ],
 })
 export class AppModule {}
