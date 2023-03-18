@@ -1,0 +1,43 @@
+{
+  "infoUser": {
+      "firstName": "artem",
+      "surName": "ivanov",
+      "lastName": "aleksandrovich",
+      "phone": "+79119584240",
+      "email": "mercy.promo.2001@gmail.com",
+      "social": "telegram @m11ono"
+  },
+  "infoRoute": {
+      "name": "Маршрут Москва - Санкт-Петербург",
+      "start": "Москва",
+      "end": "Санкт-Петербург",
+      "shedules": [
+          {
+              "time": "00:00",
+              "name": "Санкт-Петербург, ул. Шувалова 19 к1"
+          },
+          {
+              "time": "12:00",
+              "name": "Санкт-Петербург, ул. Шувалова 19 к1"
+          }
+      ],
+      "description": "Данный маршрут позводить разгрузить поток людей"
+  },
+  "infoTransports": [
+      {
+          "kind": "Автобус",
+          "mark": "Lada",
+          "model": "Vesta",
+          "vin": "123142315135145",
+          "numberOfPassengers": 10
+      },
+      {
+          "kind": "Автобус",
+          "mark": "Lada",
+          "model": "Vesta",
+          "vin": "123142315135145",
+          "numberOfPassengers": 10
+      }
+  ],
+  "addRequirements": "Это будет ночной рейс"
+}
