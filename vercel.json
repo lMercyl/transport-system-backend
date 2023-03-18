@@ -18,6 +18,7 @@
       ]
     }
   ],
+  "output": "dist",
   "github": {
     "enabled": false,
     "silent": true
