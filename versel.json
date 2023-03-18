@@ -17,5 +17,9 @@
         "DELETE"
       ]
     }
-  ]
+  ],
+  "github": {
+    "enabled": false,
+    "silent": true
+  }
 }
