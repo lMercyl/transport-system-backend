@@ -1,5 +1,5 @@
-export class CreateCarDto {
-  readonly orderId: number;
+export class AddCarDto {
+  readonly userId: string;
   readonly kind: string;
   readonly mark: string;
   readonly model: string;

@@ -1,3 +1,5 @@
+import { QrcodeModule } from './qrcode/qrcode.module';
+import { Qrcode } from './qrcode/qrcode.model';
 import { Shedule } from './shedules/shedules.model';
 import { Car } from './cars/cars.model';
 import { ShedulesModule } from './shedules/shedules.module';
@@ -33,7 +35,7 @@ import { User } from './users/users.model';
       username: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DB,
-      models: [User, Role, UserRoles, Order, Car, Shedule],
+      models: [User, Role, UserRoles, Order, Car, Shedule, Qrcode],
       autoLoadModels: true,
       synchronize: true,
     }),
@@ -43,6 +45,7 @@ import { User } from './users/users.model';
     OrdersModule,
     CarsModule,
     ShedulesModule,
+    QrcodeModule,
   ],
 })
 export class AppModule {}

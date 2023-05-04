@@ -1,3 +1,4 @@
+import { AddCarDto } from './dto/add-car.dto';
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
@@ -6,6 +7,7 @@ import { User } from './users.model';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { AddRoleDto } from './dto/add-role.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Пользователи')
 @Controller('users')

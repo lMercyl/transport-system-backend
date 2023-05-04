@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 
 interface CarCreationAttrs {
+  orderId: number;
   kind: string;
   mark: string;
   model: string;
@@ -18,7 +19,6 @@ interface CarCreationAttrs {
 
 @Table({ tableName: 'cars' })
 export class Car extends Model<Car, CarCreationAttrs> {
-  @ForeignKey(() => Order)
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -41,4 +41,10 @@ export class Car extends Model<Car, CarCreationAttrs> {
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   numberOfPassengers: string;
+
+  @ForeignKey(() => Order)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  orderId: number;
 }

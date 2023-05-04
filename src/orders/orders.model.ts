@@ -15,8 +15,10 @@ import {
   SheduleData,
 } from './orders.interface';
 import { Shedule } from 'src/shedules/shedules.model';
+import { User } from 'src/users/users.model';
 
 interface OrderCreateAttrs {
+  userId: number;
   firstName: string;
   surName: string;
   lastName: string;
@@ -81,9 +83,15 @@ export class Order extends Model<Order, OrderCreateAttrs> {
   @Column({ type: DataType.STRING })
   lastModified: string;
 
-  @HasMany(() => Car, 'id')
+  @HasMany(() => Car)
   cars: Car[];
 
-  @HasMany(() => Shedule, 'id')
+  @HasMany(() => Shedule)
   shedules: Shedule[];
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  userId: number;
 }

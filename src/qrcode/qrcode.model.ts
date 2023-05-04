@@ -1,5 +1,4 @@
 import {
-  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -8,14 +7,13 @@ import {
 } from 'sequelize-typescript';
 import { Order } from 'src/orders/orders.model';
 
-interface SheduleCreationAttrs {
+interface QrcodeCreationAttrs {
+  code: string;
   orderId: number;
-  time: string;
-  name: string;
 }
 
-@Table({ tableName: 'shedules' })
-export class Shedule extends Model<Shedule, SheduleCreationAttrs> {
+@Table({ tableName: 'qrcodes' })
+export class Qrcode extends Model<Qrcode, QrcodeCreationAttrs> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -24,11 +22,8 @@ export class Shedule extends Model<Shedule, SheduleCreationAttrs> {
   })
   id: number;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  time: string;
-
-  @Column({ type: DataType.STRING, allowNull: false })
-  name: string;
+  @Column({ type: DataType.STRING, unique: true, allowNull: false })
+  code: string;
 
   @ForeignKey(() => Order)
   @Column({

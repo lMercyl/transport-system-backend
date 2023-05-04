@@ -15,13 +15,8 @@ export class OrdersService {
 
   async createOrder(dto: CreateOrderDto) {
     const { infoUser, infoRoute, infoTransports } = dto;
-    for (let i = 0; i < infoRoute.shedules.length; i++) {
-      await this.shedulesService.createShedule(infoRoute.shedules[i]);
-    }
-    for (let i = 0; i < infoTransports.length; i++) {
-      await this.carsService.createCar(infoTransports[i]);
-    }
     const order = await this.orderRepository.create({
+      userId: Number(dto.userId),
       firstName: infoUser.firstName,
       surName: infoUser.firstName,
       lastName: infoUser.lastName,
@@ -36,6 +31,16 @@ export class OrdersService {
       value: 'На рассмотрении',
       lastModified: new Date().toString(),
     });
+    const shedulePromises = infoRoute.shedules.map((shedule) =>
+      this.shedulesService.createShedule({ orderId: order.id, ...shedule }),
+    );
+    const carPromises = infoTransports.map((car) =>
+      this.carsService.createCar({ orderId: order.id, ...car }),
+    );
+    const [shedules, cars] = await Promise.all([
+      Promise.all(shedulePromises),
+      Promise.all(carPromises),
+    ]);
     return order;
   }
 
@@ -44,6 +49,17 @@ export class OrdersService {
       include: { all: true },
     });
     return orders;
+  }
+
+  async getAllOrdersByUserId(id: number) {
+    const orders = await this.orderRepository.findAll({
+      include: {
+        where: {
+          userId: id,
+        },
+        all: true,
+      },
+    });
   }
 
   async getOrderById(id: number) {
@@ -78,7 +94,6 @@ export class OrdersService {
       infoTransports: order.cars
         ? [
             ...order.cars.map((car) => ({
-              id: car.id,
               kind: car.kind,
               mark: car.mark,
               model: car.model,

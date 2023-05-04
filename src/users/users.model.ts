@@ -1,3 +1,5 @@
+import { Order } from './../orders/orders.model';
+import { Car } from './../cars/cars.model';
 import {
   BelongsToMany,
   Column,
@@ -13,6 +15,9 @@ import { UserRoles } from '../roles/user-roles.model';
 interface UserCreationAttrs {
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
 }
 
 @Table({ tableName: 'users' })
@@ -34,6 +39,21 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
 
+  @Column({ type: DataType.STRING, allowNull: false })
+  firstName: string;
+
+  @Column({ type: DataType.STRING, allowNull: false })
+  lastName: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  avatar: string;
+
+  @Column({ type: DataType.STRING, allowNull: false })
+  phone: string;
+
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasMany(() => Order)
+  orders: Order[];
 }
