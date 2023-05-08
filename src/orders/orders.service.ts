@@ -53,13 +53,37 @@ export class OrdersService {
 
   async getAllOrdersByUserId(id: number) {
     const orders = await this.orderRepository.findAll({
-      include: {
-        where: {
-          userId: id,
-        },
-        all: true,
+      where: {
+        userId: id,
       },
     });
+    return orders;
+  }
+
+  async deleteOrderById(dto: CreateOrderDto) {
+    const order = await this.orderRepository.destroy();
+    return order;
+  }
+
+  async updateOrderById(id: number) {
+    const order = await this.orderRepository.destroy();
+    return order;
+  }
+
+  async getOrdersByLimitAndPage(limit: number, page: number, userId: number) {
+    const offset = (page - 1) * limit;
+
+    const { rows: orders, count } = await this.orderRepository.findAndCountAll({
+      where: {
+        userId,
+      },
+      limit,
+      offset,
+    });
+
+    const pages = Math.ceil(count / limit);
+
+    return { orders, count, pages };
   }
 
   async getOrderById(id: number) {
