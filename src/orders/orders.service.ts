@@ -28,7 +28,7 @@ export class OrdersService {
       end: infoRoute.end,
       description: infoRoute.descrption,
       addRequirements: dto.addRequirements,
-      value: 'На рассмотрении',
+      value: 'В обработке',
       lastModified: new Date().toString(),
     });
     const shedulePromises = infoRoute.shedules.map((shedule) =>
@@ -128,7 +128,7 @@ export class OrdersService {
         : [],
       addRequirements: order.addRequirements,
       status: {
-        value: 'На рассмотрении',
+        value: 'В обработке',
         lastModified: '12.02.2023',
       },
     };
